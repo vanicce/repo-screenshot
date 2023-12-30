@@ -1,59 +1,63 @@
 const puppeteer = require("puppeteer");
-
-async function captureScreenshot(url, outputPath, delayInSeconds) {
-  const browser = await puppeteer.launch({ headless: "new" });
-  const page = await browser.newPage();
-
-  // Vá para a URL desejada
-  await page.goto(url, { waitUntil: "networkidle2" });
-
-  await page.setViewport({ width: 1920, height: 1080 });
-
-  await new Promise((resolve) => setTimeout(resolve, delayInSeconds * 1000));
-
-  // Tire uma captura de tela
-  await page.screenshot({
-    path: outputPath,
-    fullPage: true,
-    quality: 100,
-    type: "jpeg",
-  });
-
-  // Feche o navegador
-  await browser.close();
-}
-
-// Exemplo de uso
-const siteURL = "https://github-card.vercel.app/card/lucwx";
-const outputImagePath = "./images/screenshot.jpeg";
-const outputMobile = "./images/mobileScreenshot.png";
+const fs = require("fs");
+const path = require("path");
 
 const delayInSeconds = 3;
+const sites = [
+  "https://lucas-pomodoro.vercel.app",
+  "https://lucas-portfolio-navy.vercel.app",
+  "https://github-card.vercel.app/card/lucwx",
+];
 
-captureScreenshot(siteURL, outputImagePath, delayInSeconds)
-  .then(() => console.log("Captura de tela concluída."))
-  .catch((err) => console.error("Erro ao capturar a tela:", err));
-
-async function captureMobileScreenshot(url, outputPath, delayInSeconds) {
+async function captureScreenshot(urls, delayInSeconds) {
   const browser = await puppeteer.launch({ headless: "new" });
-  const page = await browser.newPage();
 
-  // Emular um dispositivo móvel (por exemplo, um iPhone X)
-  await page.emulate(puppeteer.devices["iPhone X"]);
+  for (const url of urls) {
+    const siteName = new URL(url).hostname;
 
-  // Vá para a URL desejada
-  await page.goto(url, { waitUntil: "networkidle2" });
+    const directoryPath = path.join(__dirname, siteName);
+    if (!fs.existsSync(directoryPath)) {
+      fs.mkdirSync(directoryPath);
+    }
 
-  // Aguarde o tempo especificado antes de tirar a captura de tela
-  await new Promise((resolve) => setTimeout(resolve, delayInSeconds * 1000));
+    const desktopPage = await browser.newPage();
+    await desktopPage.setViewport({ width: 1920, height: 1080 });
 
-  // Tire uma captura de tela
-  await page.screenshot({ path: outputPath, quality: 100, type: "jpeg" });
+    const mobilePage = await browser.newPage();
+    await mobilePage.emulate(puppeteer.devices["iPhone X"]);
 
-  // Feche o navegador
+    const pages = [
+      { name: "desktop", page: desktopPage },
+      { name: "mobile", page: mobilePage },
+    ];
+
+    for (const { name, page } of pages) {
+      await page.goto(url, { waitUntil: "networkidle2" });
+
+      await page.evaluate((modalSelector) => {
+        const modal = document.querySelector(modalSelector);
+        if (modal) {
+          modal.style.display = "none";
+        }
+      }, "#modal");
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, delayInSeconds * 1000)
+      );
+
+      await page.screenshot({
+        path: path.join(directoryPath, `${siteName}_${name}.jpeg`),
+        fullPage: true,
+        quality: 100,
+        type: "jpeg",
+      });
+    }
+    await desktopPage.close();
+    await mobilePage.close();
+  }
   await browser.close();
 }
 
-captureMobileScreenshot(siteURL, outputMobile, delayInSeconds)
-  .then(() => console.log("Captura de tela móvel concluída após o atraso."))
-  .catch((err) => console.error("Erro ao capturar a tela móvel:", err));
+captureScreenshot(sites, delayInSeconds)
+  .then(() => console.log("Screenshot capturada com sucesso!"))
+  .catch((err) => console.error("Erro ao capturar screenshot:", err));
