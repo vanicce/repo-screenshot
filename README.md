@@ -8,6 +8,15 @@ O projeto Web Screenshot é uma ferramenta simples para realizar o fetch de repo
 - Captura de screenshots da homepage do site associado ao repositório
 - Armazenamento das screenshots em diretório correspondente
 
+## Vídeo Exemplo:
+
+<p align='center'>
+<video width="80%" height="80%" controls>
+  <source src="./teste2.mp4" type="video/mp4">
+  Seu navegador não suporta o elemento de vídeo.
+</video>
+</p>
+
 ## Pré-requisitos
 Certifique-se de ter o Node.js instalado para executar o projeto.
 
