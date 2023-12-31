@@ -1,16 +1,37 @@
-const puppeteer = require("puppeteer");
-const fs = require("fs");
-const path = require("path");
+const puppeteer = require('puppeteer')
+const fs = require('fs')
+const path = require('path')
 
+const sites = [];
 const delayInSeconds = 3;
-const sites = [
-  "https://lucas-pomodoro.vercel.app",
-  "https://lucas-portfolio-navy.vercel.app",
-  "https://github-card.vercel.app/card/lucwx",
-];
 
 async function captureScreenshot(urls, delayInSeconds) {
   const browser = await puppeteer.launch({ headless: "new" });
+
+  const fetchprojects = async (urls) => {
+    try {
+      const response = await fetch("https://api.github.com/users/lucwx/repos");
+
+      const repos = await response.json();
+
+      repos
+        .filter(
+          (repo) =>
+            repo.homepage !== null &&
+            repo.homepage !== undefined &&
+            repo.homepage !== ""
+        )
+        .map((repo) => {
+          urls.push(repo.homepage);
+        });
+
+      console.log(urls);
+    } catch (err) {
+      console.log("houve um erro: " + err);
+    }
+  };
+
+  await fetchprojects(urls);
 
   for (const url of urls) {
     const siteName = new URL(url).hostname;
@@ -47,7 +68,7 @@ async function captureScreenshot(urls, delayInSeconds) {
 
       await page.screenshot({
         path: path.join(directoryPath, `${siteName}_${name}.jpeg`),
-        fullPage: true,
+        fullPage: false,
         quality: 100,
         type: "jpeg",
       });
