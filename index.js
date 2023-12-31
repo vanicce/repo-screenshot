@@ -19,7 +19,8 @@ async function captureScreenshot(urls, delayInSeconds) {
           (repo) =>
             repo.homepage !== null &&
             repo.homepage !== undefined &&
-            repo.homepage !== ""
+            repo.homepage !== "" &&
+            repo.homepage !== 'https://github.com/lucwx'
         )
         .map((repo) => {
           urls.push(repo.homepage);
@@ -68,7 +69,6 @@ async function captureScreenshot(urls, delayInSeconds) {
 
       await page.screenshot({
         path: path.join(directoryPath, `${siteName}_${name}.jpeg`),
-        fullPage: false,
         quality: 100,
         type: "jpeg",
       });
