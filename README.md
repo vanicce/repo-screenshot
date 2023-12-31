@@ -10,12 +10,7 @@ O projeto Web Screenshot é uma ferramenta simples para realizar o fetch de repo
 
 ## Vídeo Exemplo:
 
-<p align='center'>
-<video width="80%" height="80%" controls>
-  <source src="./teste2.mp4" type="video/mp4">
-  Seu navegador não suporta o elemento de vídeo.
-</video>
-</p>
+https://github.com/lucwx/web-screenshot/assets/103083001/5ba8f413-e5f7-4a4c-8411-7b5ca3fcff60
 
 ## Pré-requisitos
 Certifique-se de ter o Node.js instalado para executar o projeto.
