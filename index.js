@@ -46,7 +46,7 @@ async function captureScreenshot(urls, delayInSeconds) {
     await desktopPage.setViewport({ width: 1920, height: 1080 });
 
     const mobilePage = await browser.newPage();
-    await mobilePage.emulate(puppeteer.devices["iPhone X"]);
+    await mobilePage.emulate(puppeteer.KnownDevices["iPhone X"]);
 
     const pages = [
       { name: "desktop", page: desktopPage },
