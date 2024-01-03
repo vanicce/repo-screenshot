@@ -1,5 +1,16 @@
 {
   "dependencies": {
     "puppeteer": "^21.6.1"
-  }
+  },
+  "name": "web-screenshot",
+  "description": "The Web Screenshot project is a simple tool for fetching GitHub repositories and taking screenshots of the homepages of the websites associated with these repositories. The screenshots are then stored in a directory with the name of the respective site.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["puppeteer", "node", "screenshot"],
+  "author": "Lucas",
+  "license": "ISC"
 }
