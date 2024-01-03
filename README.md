@@ -1,46 +1,41 @@
 # Web Screenshot
+## Project Description
+The Web Screenshot project is a simple tool for fetching GitHub repositories and taking screenshots of the homepages of the websites associated with these repositories. The screenshots are then stored in a directory with the name of the respective site.
 
-## Descrição do Projeto
-O projeto Web Screenshot é uma ferramenta simples para realizar o fetch de repositórios do GitHub e tirar screenshots das homepages dos sites associados a esses repositórios. As screenshots são então armazenadas em um diretório com o nome do respectivo site.
+## Features
+Fetch GitHub repositories
+Capture screenshots of the homepage of the site associated with the repository
+Store screenshots in the corresponding directory
 
-## Funcionalidades
-- Fetch de repositórios do GitHub
-- Captura de screenshots da homepage do site associado ao repositório
-- Armazenamento das screenshots em diretório correspondente
+## Example Video:
+https://github.com/lucwx/web-screenshot/assets/103083001/74ce95d0-fcc5-4d09-ba69-5075917236af
 
-## Vídeo Exemplo:
+## Prerequisites
+Make sure you have Node.js installed to run the project.
 
-https://github.com/lucwx/web-screenshot/assets/103083001/5ba8f413-e5f7-4a4c-8411-7b5ca3fcff60
-
-## Pré-requisitos
-Certifique-se de ter o Node.js instalado para executar o projeto.
-
-## Instalação
-1. Clone o repositório:
-
+## Installation
+ 1. Clone the repository:
 ```bash
 git clone https://github.com/lucwx/web-screenshot.git
 ```
-2. Navegue até o diretório do projeto:
-
+ 2. Navigate to the project directory:
 ```bash
 cd web-screenshot
 ```
 
-3. Instale as dependências:
-
+ 3. Install the dependencies:
 ```bash
 npm install
 ```
-
-## Como Usar
-1. Execute o script principal:
-``` bash
+## How to Use
+ 1. Run the main script:
+```bash
 node index.js
 ```
-2. Siga as instruções para inserir os detalhes do repositório.
-Exemplo de Estrutura do Diretório
-``` bash
+ 2. Follow the instructions to input the repository details.
+Example Directory Structure
+
+```bash
 web-screenshot/
 |-- screenshots/
 |   |-- site1.com.png
@@ -49,5 +44,5 @@ web-screenshot/
 |-- README.md
 |-- ...
 ```
-## Contribuição
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+## Contribution
+Contributions are welcome! Feel free to open issues and pull requests.
