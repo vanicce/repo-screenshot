@@ -37,7 +37,7 @@ async function captureScreenshot(urls, delayInSeconds) {
   for (const url of urls) {
     const siteName = new URL(url).hostname;
 
-    const directoryPath = path.join(__dirname, siteName);
+    const directoryPath = path.join(__dirname, "screenshots", siteName);
     if (!fs.existsSync(directoryPath)) {
       fs.mkdirSync(directoryPath);
     }
