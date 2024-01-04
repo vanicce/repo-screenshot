@@ -1,6 +1,6 @@
-const puppeteer = require('puppeteer')
-const fs = require('fs')
-const path = require('path')
+const puppeteer = require("puppeteer");
+const fs = require("fs");
+const path = require("path");
 
 const sites = [];
 const delayInSeconds = 3;
@@ -17,10 +17,9 @@ async function captureScreenshot(urls, delayInSeconds) {
       repos
         .filter(
           (repo) =>
-            repo.homepage !== null &&
             repo.homepage !== undefined &&
             repo.homepage !== "" &&
-            repo.homepage !== 'https://github.com/lucwx'
+            repo.homepage !== "https://github.com/lucwx"
         )
         .map((repo) => {
           urls.push(repo.homepage);
@@ -43,7 +42,7 @@ async function captureScreenshot(urls, delayInSeconds) {
     }
 
     const desktopPage = await browser.newPage();
-    await desktopPage.setViewport({ width: 1920, height: 1080 });
+    await desktopPage.setViewport({ width: 1280, height: 720 });
 
     const mobilePage = await browser.newPage();
     await mobilePage.emulate(puppeteer.KnownDevices["iPhone X"]);
