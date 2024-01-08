@@ -5,7 +5,7 @@
   },
   "name": "repo-screenshot",
   "description": "The repo screenshot project is a simple tool for fetching GitHub repositories and taking screenshots of the homepages of the websites associated with these repositories. The screenshots are then stored in a directory with the name of the respective site.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "bin": "./index.js",
   "scripts": {
