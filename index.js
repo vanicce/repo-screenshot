@@ -5,10 +5,10 @@ const path = require("path");
 const sites = [];
 const delayInSeconds = 3;
 
-async function captureScreenshot(urls, delayInSeconds) {
+const captureScreenshot = (async () => {
   const browser = await puppeteer.launch({ headless: "new" });
 
-  const fetchprojects = async (urls) => {
+  const fetchprojects = async (sites) => {
     try {
       const response = await fetch("https://api.github.com/users/lucwx/repos");
 
@@ -22,18 +22,18 @@ async function captureScreenshot(urls, delayInSeconds) {
             repo.homepage !== "https://github.com/lucwx"
         )
         .map((repo) => {
-          urls.push(repo.homepage);
+          sites.push(repo.homepage);
         });
 
-      console.log(urls);
+      console.log(sites);
     } catch (err) {
       console.log("houve um erro: " + err);
     }
   };
 
-  await fetchprojects(urls);
+  await fetchprojects(sites);
 
-  for (const url of urls) {
+  for (const url of sites) {
     const siteName = new URL(url).hostname;
 
     const directoryPath = path.join(__dirname, "screenshots", siteName);
@@ -76,8 +76,6 @@ async function captureScreenshot(urls, delayInSeconds) {
     await mobilePage.close();
   }
   await browser.close();
-}
 
-captureScreenshot(sites, delayInSeconds)
-  .then(() => console.log("Screenshot capturada com sucesso!"))
-  .catch((err) => console.error("Erro ao capturar screenshot:", err));
+  console.log("screenshots are ready!");
+})(sites, delayInSeconds);
