@@ -1,25 +1,35 @@
+#!/usr/bin/env node
+
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
+const { program } = require("commander");
 
 const sites = [];
 const delayInSeconds = 3;
 
-const captureScreenshot = (async () => {
+(async () => {
+  program
+    .option('-n, --name <string>', 'your user in GitHub');
+
+  program.parse(process.argv);
+
+  const options = program.opts();
+
   const browser = await puppeteer.launch({ headless: "new" });
 
   const fetchprojects = async (sites) => {
     try {
-      const response = await fetch("https://api.github.com/users/lucwx/repos");
+      const response = await fetch(`https://api.github.com/users/${options.name}/repos`);
 
       const repos = await response.json();
 
       repos
         .filter(
           (repo) =>
-            repo.homepage !== undefined &&
+            repo.homepage &&
             repo.homepage !== "" &&
-            repo.homepage !== "https://github.com/lucwx"
+            repo.homepage !== `https://github.com/${options.name}`
         )
         .map((repo) => {
           sites.push(repo.homepage);
