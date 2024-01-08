@@ -37,7 +37,7 @@ const delayInSeconds = 3;
 
       console.log(sites);
     } catch (err) {
-      console.log("houve um erro: " + err);
+      console.log("an error ocurred: " + err);
     }
   };
 
