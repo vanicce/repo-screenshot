@@ -1,6 +1,6 @@
-# Web Screenshot
+# Repo Screenshot
 ## Project Description
-The Web Screenshot project is a simple tool for fetching GitHub repositories and taking screenshots of the homepages of the websites associated with these repositories. The screenshots are then stored in a directory with the name of the respective site.
+The Repo Screenshot project is a simple tool for fetching GitHub repositories and taking screenshots of the homepages of the websites associated with these repositories. The screenshots are then stored in a directory with the name of the respective site.
 
 ## Features
 Fetch GitHub repositories
@@ -16,11 +16,11 @@ Make sure you have Node.js installed to run the project.
 ## Installation
  1. Clone the repository:
 ```bash
-git clone https://github.com/lucwx/web-screenshot.git
+git clone https://github.com/lucwx/repo-screenshot.git
 ```
  2. Navigate to the project directory:
 ```bash
-cd web-screenshot
+cd repo-screenshot
 ```
 
  3. Install the dependencies:
@@ -36,7 +36,7 @@ node index.js
 Example Directory Structure
 
 ```bash
-web-screenshot/
+repo-screenshot/
 |-- screenshots/
 |   |-- site1.com.png
 |   |-- site2.org.png
